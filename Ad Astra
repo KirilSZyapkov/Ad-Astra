@@ -1,0 +1,15 @@
+function adAstra(input) {
+    let pattern = /(#|\|)(?<product>[A-Z a-z]+)\1(?<data>\d{2}\/\d{2}\/\d{2})\1(?<calory>\d+)\1/g;
+    let totalCalories = 0;
+    let totalDays = 0;
+    let matches = pattern.exec(input);
+    let result = "";
+    while (matches !== null) {
+        totalCalories += Number(matches.groups["calory"]);
+        result += `Item: ${matches.groups["product"]}, Best before: ${matches.groups["data"]}, Nutrition: ${matches.groups["calory"]}\n`;
+        matches = pattern.exec(input);
+    }
+    totalDays = Math.trunc(totalCalories / 2000);
+    console.log(`You have food to last you for: ${totalDays} days!`);
+    console.log(result);
+}
